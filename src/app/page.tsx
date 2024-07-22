@@ -6,12 +6,16 @@ export const Top: React.FC = () => {
   
   const router = useRouter()
   
-  const handleClick = (context:string) => {
-    const dataToPass = context
-    router.push(`/ConfirmCallDestination?data=${encodeURIComponent(dataToPass)}`)
+  const handleClick = () => {
+    router.push('/confirm-call-destination/general-reception')
   }
+
+  const handleClick2 = () => {
+    router.push('/confirm-call-destination/recruitment-interview')
+  }
+  
   return (
-    <Flex maxWidth="768px" height={'100vh'} margin="0 auto" justifyContent={'center'} alignItems={'center'} backgroundImage="url('/hitocolor-logo.webp')" bgRepeat={'no-repeat'} bgSize={'contain'} bgPosition={'center'}>
+    <Flex maxWidth="768px" height='100vh' margin="0 auto" justifyContent='center' alignItems='center' backgroundImage="url('/hitocolor-logo.webp')" bgRepeat='no-repeat' bgSize='contain' bgPosition='center'>
         <Box
           position="fixed"
           top="0"
@@ -25,7 +29,7 @@ export const Top: React.FC = () => {
         >
       <VStack gap="20px" alignItems="center" >
     
-        <Text textAlign="center" fontSize={'x-large'} fontWeight={'bold'}>
+        <Text textAlign="center" fontSize='x-large' fontWeight='bold'>
           ご来訪いただきありがとうございます。<br />
           下記のボタンからご用件をお選びください。
         </Text>
@@ -36,14 +40,14 @@ export const Top: React.FC = () => {
             height="150px"
             backgroundColor="white"
             color="black"
-            fontSize={'x-large'}
-            fontWeight={'bold'}
+            fontSize='x-large'
+            fontWeight='bold'
             border="1px solid #ccc"
             borderRadius="25px"
             boxShadow="0 2px 4px rgba(0,0,0,0.1)"
-            onClick={()=>handleClick('総合受付')}
+            onClick={handleClick}
           >
-            総合受付
+            総合受付            
           </Button>
       
           <Button
@@ -51,12 +55,12 @@ export const Top: React.FC = () => {
             height="150px"
             backgroundColor="white"
             color="black"
-            fontSize={'x-large'}
-            fontWeight={'bold'}
+            fontSize='x-large'
+            fontWeight='bold'
             border="1px solid #ccc"
             borderRadius="25px"
             boxShadow="0 2px 4px rgba(0,0,0,0.1)"
-            onClick={()=>handleClick('hitocolor採用面接')}
+            onClick={handleClick2}
           >
             hitocolor採用面接
           </Button>
