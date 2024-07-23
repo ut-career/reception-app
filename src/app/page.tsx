@@ -1,5 +1,5 @@
 "use client";
-import { VStack, Image, Text, Button, Flex, Box } from '@kuma-ui/core';
+import { VStack, Text, Button  } from '@kuma-ui/core';
 import { useRouter } from 'next/navigation'
 
 export const Top: React.FC = () => {
@@ -15,20 +15,7 @@ export const Top: React.FC = () => {
   }
   
   return (
-    <Flex maxWidth="768px" height='100vh' margin="0 auto" justifyContent='center' alignItems='center' backgroundImage="url('/hitocolor-logo.webp')" bgRepeat='no-repeat' bgSize='contain' bgPosition='center'>
-        <Box
-          position="fixed"
-          top="0"
-          left="0"
-          width="100%"
-          height="100%"
-          backgroundColor="rgba(255,255,255,0.5)"
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-        >
       <VStack gap="20px" alignItems="center" >
-    
         <Text textAlign="center" fontSize='x-large' fontWeight='bold'>
           ご来訪いただきありがとうございます。<br />
           下記のボタンからご用件をお選びください。
@@ -66,9 +53,7 @@ export const Top: React.FC = () => {
           </Button>
         </VStack>
       </VStack>
-      </Box>
 
-    </Flex>
   );
 }
 
