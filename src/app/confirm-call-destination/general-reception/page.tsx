@@ -1,7 +1,8 @@
+"use client";
 import { VStack, Text, Flex, Box } from '@kuma-ui/core';
 import { GeneralReceptionActionButtons } from '../_components/ActionButton';
 
-export const ConfirmCallDestination = async () => {
+const ConfirmCallDestination = () => {
   return ( 
     <Flex maxWidth="768px" height='100vh' margin="0 auto" justifyContent='center' alignItems='center' backgroundImage="url('/hitocolor-logo.webp')" bgRepeat='no-repeat' bgSize='contain' bgPosition='center'>
       <VStack gap="20px" alignItems="center">
