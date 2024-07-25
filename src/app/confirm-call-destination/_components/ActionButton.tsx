@@ -4,21 +4,22 @@ import { Button, Flex } from '@kuma-ui/core';
 import { useRouter } from 'next/navigation';
 import { NextResponse } from 'next/server';
 
+const ENDPOINT_BASE_PATH = process.env.NEXT_PUBLIC_ENDPOINT_BASE_PATH
+
 export const GeneralReceptionActionButtons = () => {
   const handleCancel = useActionButton()
-  const handleConfirm = usesendMessage('toGeneralReception')
+  const handleConfirm = usesendMessage('general-reception')
   return <ActionButtons onConfirm={handleConfirm} onCancel={handleCancel} />
 }
 
 export const RecruitmentInterviewActionButtons = () => {
   const handleCancel = useActionButton()
-  const handleConfirm = usesendMessage('toRecruitmentInterview')
+  const handleConfirm = usesendMessage('recruitment-interview')
   return <ActionButtons onConfirm={handleConfirm} onCancel={handleCancel} />
 }
 
 const useActionButton = () =>{
   const router = useRouter();
-
   const handleCancel: React.ComponentProps<typeof ActionButtons>['onCancel'] = (e) => {
     e.preventDefault();
     router.push('/');
@@ -29,7 +30,7 @@ const useActionButton = () =>{
 const usesendMessage = (endpoint:string) =>{
   const sendMessage: React.ComponentProps<typeof ActionButtons>['onConfirm'] = async(e) => {
     e.preventDefault();
-    const response = await fetch(`https://localhost:8080/${endpoint}`, { //バックエンドデプロイ後正しいURLに変更
+    const response = await fetch(`${ENDPOINT_BASE_PATH}/${endpoint}`, { //バックエンドデプロイ後正しいURLに変更
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
