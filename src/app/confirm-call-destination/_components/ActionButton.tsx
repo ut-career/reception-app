@@ -8,13 +8,13 @@ const ENDPOINT_BASE_PATH = process.env.NEXT_PUBLIC_ENDPOINT_BASE_PATH
 
 export const GeneralReceptionActionButtons = () => {
   const handleCancel = useActionButton()
-  const handleConfirm = usesendMessage('general-reception')
+  const handleConfirm = useSendMessage('general-reception')
   return <ActionButtons onConfirm={handleConfirm} onCancel={handleCancel} />
 }
 
 export const RecruitmentInterviewActionButtons = () => {
   const handleCancel = useActionButton()
-  const handleConfirm = usesendMessage('recruitment-interview')
+  const handleConfirm = useSendMessage('recruitment-interview')
   return <ActionButtons onConfirm={handleConfirm} onCancel={handleCancel} />
 }
 
@@ -27,22 +27,19 @@ const useActionButton = () =>{
   return handleCancel
 }
 
-const usesendMessage = (endpoint:string) =>{
+const useSendMessage = (endpoint:string) =>{
   const sendMessage: React.ComponentProps<typeof ActionButtons>['onConfirm'] = async(e) => {
     e.preventDefault();
-    const response = await fetch(`${ENDPOINT_BASE_PATH}/${endpoint}`, { //バックエンドデプロイ後正しいURLに変更
+    const response = await fetch(`${ENDPOINT_BASE_PATH}/${endpoint}`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
     })
 
     if (!response.ok) {
-      return NextResponse.json({ error: 'Failed to send message' }, { status: response.status })
+      return NextResponse.json({ error: 'Failed to send message', status: response.status })
     }
 
     const data = await response.json()
-    return NextResponse.json(data)
+    return data
   }
  return sendMessage
 }
