@@ -36,7 +36,7 @@ const useSendMessage = (endpoint:string) =>{
 
     //別の画面でエラーメッセージとしてアラートで表示する予定のためreturnしています。
     if (!response.ok) {
-      return NextResponse.json({ error: 'Failed to send message', status: response.status })
+      return { error: 'Failed to send message', status: response.status }
     }
     //レスポンスが200なのか401なのかによって呼び出し完了画面と呼び出し失敗画面のどちらに遷移するかを決めるためreturnしています。
     const data = await response.json()
