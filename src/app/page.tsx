@@ -2,7 +2,7 @@
 import { VStack, Image, Text, Button, Flex, Box } from '@kuma-ui/core';
 import { useRouter } from 'next/navigation'
 
-export const Top: React.FC = () => {
+const Top: React.FC = () => {
   
   const router = useRouter()
   
