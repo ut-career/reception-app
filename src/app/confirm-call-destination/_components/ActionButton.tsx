@@ -40,11 +40,8 @@ const useSendMessage = (endpoint:string) =>{
       },
     })
     setIsLoading(false)
-        if(response.ok){
-        router.push('../../call-result/success')
-      }else{
-      router.push('../../call-result/failed')
-    }
+    const data = response.status
+    return data
   }
  return {sendMessage,isLoading}
 }
