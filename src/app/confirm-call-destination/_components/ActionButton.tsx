@@ -1,21 +1,21 @@
 'use client';
-
-import { Button, Flex } from '@kuma-ui/core';
+import React from "react";
+import { Box, Button, Flex,Text,css } from '@kuma-ui/core';
 import { useRouter } from 'next/navigation';
-import { NextResponse } from 'next/server';
+import { useState } from 'react';
 
 const ENDPOINT_BASE_PATH = process.env.NEXT_PUBLIC_ENDPOINT_BASE_PATH
 
 export const GeneralReceptionActionButtons = () => {
   const handleCancel = useActionButton()
   const handleConfirm = useSendMessage('general-reception')
-  return <ActionButtons onConfirm={handleConfirm} onCancel={handleCancel} />
+  return <ActionButtons onConfirm={handleConfirm.sendMessage} onCancel={handleCancel} isLoading={handleConfirm.isLoading}/>
 }
 
 export const RecruitmentInterviewActionButtons = () => {
   const handleCancel = useActionButton()
   const handleConfirm = useSendMessage('recruitment-interview')
-  return <ActionButtons onConfirm={handleConfirm} onCancel={handleCancel} />
+  return <ActionButtons onConfirm={handleConfirm.sendMessage} onCancel={handleCancel}  isLoading={handleConfirm.isLoading}/>
 }
 
 const useActionButton = () =>{
@@ -28,31 +28,76 @@ const useActionButton = () =>{
 }
 
 const useSendMessage = (endpoint:string) =>{
+  const [isLoading,setIsLoading] = useState(false)
+  const router = useRouter()
   const sendMessage: React.ComponentProps<typeof ActionButtons>['onConfirm'] = async(e) => {
+    setIsLoading(true)
     e.preventDefault();
     const response = await fetch(`${ENDPOINT_BASE_PATH}/${endpoint}`, {
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
     })
-
-    //別の画面でエラーメッセージとしてアラートで表示する予定のためreturnしています。
-    if (!response.ok) {
-      return { error: 'Failed to send message', status: response.status }
+    setIsLoading(false)
+        if(response.ok){
+        router.push('../../call-result/success')
+      }else{
+      router.push('../../call-result/failed')
     }
-    //レスポンスが200なのか401なのかによって呼び出し完了画面と呼び出し失敗画面のどちらに遷移するかを決めるためreturnしています。
-    const data = await response.json()
-    return data
   }
- return sendMessage
+ return {sendMessage,isLoading}
 }
+
+const spinAnimation = css`
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+`;
+
+const LoadingSpinner = () => {
+  return (
+    <Box
+      width="200px"
+      height="200px"
+      border="16px solid rgba(255,255,255,0.3)"
+      borderTop="16px solid #00A0E9"
+      borderRadius="50%"
+      animation="spin 1s linear infinite"
+      className={spinAnimation}
+    />
+  );
+};
 
 const ActionButtons: React.FC<{
   onConfirm: React.ComponentProps<'form'>['onSubmit']
   onCancel: React.ComponentProps<'form'>['onSubmit']
+  isLoading:boolean
 }> = ({
-  onConfirm, onCancel
+  onConfirm, onCancel,isLoading
 }) => {
-  return (
-    <Flex justifyContent="space-around">
+  return isLoading ? (
+    <>
+    <Box
+          position="fixed"
+          top="0"
+          left="0"
+          width="100%"
+          height="100%"
+          backgroundColor="rgba(0,0,0,0.5)"  
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+        >
+      <Flex justifyContent="center" flexDirection="column">
+        <LoadingSpinner/>
+        <Text color='white' fontSize='xx-large'>呼出中</Text>
+      </Flex>
+      </Box>
+    </>
+  ):(
+      <Flex justifyContent="space-around">
       <form onSubmit={onCancel} >
         <Button
           type="submit"
