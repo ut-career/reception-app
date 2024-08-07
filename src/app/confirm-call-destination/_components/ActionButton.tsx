@@ -9,13 +9,13 @@ const ENDPOINT_BASE_PATH = process.env.NEXT_PUBLIC_ENDPOINT_BASE_PATH
 export const GeneralReceptionActionButtons = () => {
   const handleCancel = useActionButton()
   const handleConfirm = useSendMessage('general-reception')
-  return <ActionButtons onConfirm={handleConfirm.sendMessage} onCancel={handleCancel} isLoading={handleConfirm.isLoading}/>
+  return <ActionButtons onConfirm={handleConfirm.onConfirm} onCancel={handleCancel} isLoading={handleConfirm.isLoading}/>
 }
 
 export const RecruitmentInterviewActionButtons = () => {
   const handleCancel = useActionButton()
   const handleConfirm = useSendMessage('recruitment-interview')
-  return <ActionButtons onConfirm={handleConfirm.sendMessage} onCancel={handleCancel}  isLoading={handleConfirm.isLoading}/>
+  return <ActionButtons onConfirm={handleConfirm.onConfirm} onCancel={handleCancel}  isLoading={handleConfirm.isLoading}/>
 }
 
 const useActionButton = () =>{
@@ -30,7 +30,7 @@ const useActionButton = () =>{
 const useSendMessage = (endpoint:string) =>{
   const [isLoading,setIsLoading] = useState(false)
   const router = useRouter()
-  const sendMessage: React.ComponentProps<typeof ActionButtons>['onConfirm'] = async(e) => {
+  const onConfirm: React.ComponentProps<typeof ActionButtons>['onConfirm'] = async(e) => {
     setIsLoading(true)
     e.preventDefault();
     const response = await fetch(`${ENDPOINT_BASE_PATH}/${endpoint}`, {
@@ -41,12 +41,12 @@ const useSendMessage = (endpoint:string) =>{
     })
     setIsLoading(false)
     if(response.ok){
-      router.push('../../called/success')
+      router.push('/called/success')
     }else{
-    router.push('../../called/failure')
+    router.push('/called/failure')
   }
   }
- return {sendMessage,isLoading}
+ return {onConfirm,isLoading}
 }
 
 const spinAnimation = css`
