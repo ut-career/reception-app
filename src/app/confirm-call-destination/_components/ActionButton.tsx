@@ -39,12 +39,12 @@ const useSendMessage = (endpoint:string) =>{
         'Content-Type': 'application/json'
       },
     })
-    setIsLoading(false)
     if(response.ok){
       router.push('/called/success')
     }else{
     router.push('/called/failure')
   }
+  setIsLoading(false)
   }
  return {onConfirm,isLoading}
 }
