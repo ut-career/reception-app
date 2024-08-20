@@ -10,6 +10,9 @@ export const metadata: Metadata = {
     statusBarStyle: 'default',
     title: 'hitocolor 受付アプリ',
   },
+  icons: {
+    apple: '/icon/logo.png',
+  },
   viewport: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no',
 }
 
@@ -20,9 +23,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ja">
-      <head>
-        <link rel="icon" href='/hitocolor-logo.webp'></link>
-      </head>
       <body>
       <Flex maxWidth="768px" height='100vh' margin="0 auto" justifyContent='center' alignItems='center' backgroundImage="url('/hitocolor-logo.webp')" bgRepeat='no-repeat' bgSize='contain' bgPosition='center'>
         <Box
