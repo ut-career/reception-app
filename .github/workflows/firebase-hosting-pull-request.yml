@@ -24,14 +24,15 @@ jobs:
         with:
           node-version: 20
           cache: 'pnpm'
-          
+
       - name: Install dependencies
         run: pnpm install
       - run: pnpm run build
-        env:
-          FIREBASE_CLI_EXPERIMENTS: webframeworks
+      
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_HITOCOLOR_RECEPTION }}
           projectId: hitocolor-reception
+        env:
+          FIREBASE_CLI_EXPERIMENTS: webframeworks
