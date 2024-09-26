@@ -35,4 +35,3 @@ jobs:
           projectId: hitocolor-reception
         env:
           FIREBASE_CLI_EXPERIMENTS: webframeworks
-          NEXT_PUBLIC_API_URL: ${{ secrets.RECEPTION_API_URL }}
