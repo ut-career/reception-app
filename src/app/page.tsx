@@ -94,13 +94,13 @@ const Top: React.FC = () => {
     const resetTimer = () => {
       clearTimeout(timer);
       setActive(false);
-      timer = setTimeout(() => setActive(true), 3000);
+      timer = setTimeout(() => setActive(true), 30000);
     };
 
     window.addEventListener('mousemove', resetTimer);
     window.addEventListener('keydown', resetTimer);
 
-    timer = setTimeout(() => setActive(true), 3000);
+    timer = setTimeout(() => setActive(true), 30000);
 
     return () => {
       clearTimeout(timer);
