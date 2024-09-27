@@ -6,7 +6,7 @@ export default function Layout({
   children: React.ReactNode
 }) {
   return (
-    <Flex maxWidth="768px" height='100vh' margin="0 auto" justifyContent='center' alignItems='center' backgroundImage="url('/hitocolor-logo.webp')" bgRepeat='no-repeat' bgSize='contain' bgPosition='center'>
+    <Flex maxWidth="768px" height='100vh' margin="0 auto" justifyContent='center' alignItems='center' backgroundImage="url('/rogo2-1.png')" bgRepeat='no-repeat' bgSize='contain' bgPosition='center'>
       <VStack gap="20px" alignItems="center">
         <Box
           position="fixed"
