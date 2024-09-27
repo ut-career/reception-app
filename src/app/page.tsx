@@ -94,13 +94,15 @@ const Top: React.FC = () => {
     const resetTimer = () => {
       clearTimeout(timer);
       setActive(false);
-      timer = setTimeout(() => setActive(true), 30000);
+    // 確認しやすいように3秒でスクリーンセーバーに切り替わるように
+    // 足立さんに確認していただき次第30秒に戻します
+      timer = setTimeout(() => setActive(true), 3000);
     };
 
     window.addEventListener('mousemove', resetTimer);
     window.addEventListener('keydown', resetTimer);
-
-    timer = setTimeout(() => setActive(true), 30000);
+    // 上と同じく
+    timer = setTimeout(() => setActive(true), 3000);
 
     return () => {
       clearTimeout(timer);
