@@ -8,6 +8,7 @@ permissions:
   contents: read
   pull-requests: write
 jobs:
+
   build_and_preview:
     if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
     runs-on: ubuntu-latest
@@ -27,9 +28,10 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install
-        
+      - name: create env file
+        run: 
+          echo "NEXT_PUBLIC_ENDPOINT_BASE_PATH=${{secrets.RECEPTION_API_URL}}" >> .env.local
       - run: pnpm run build
-
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
@@ -37,3 +39,4 @@ jobs:
           projectId: hitocolor-reception
         env:
           FIREBASE_CLI_EXPERIMENTS: webframeworks
+      
