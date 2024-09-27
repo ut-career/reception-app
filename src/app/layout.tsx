@@ -24,7 +24,7 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body>
-      <Flex maxWidth="768px" height='100vh' margin="0 auto" justifyContent='center' alignItems='center' backgroundImage="url('/hitocolor-logo.webp')" bgRepeat='no-repeat' bgSize='contain' bgPosition='center'>
+      <Flex maxWidth="768px" height='100vh' margin="0 auto" justifyContent='center' alignItems='center' backgroundImage="url('/rogo2-1.png')" bgRepeat='no-repeat' bgSize='contain' bgPosition='center'>
         <Box
           position="fixed"
           top="0"
