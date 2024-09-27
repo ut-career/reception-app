@@ -27,11 +27,11 @@ jobs:
           cache: 'pnpm'
 
       - name: Install dependencies
+        env:
+          NEXT_PUBLIC_ENDPOINT_BASE_PATH: ${{ secrets.RECEPTION_API_URL }}
         run: pnpm install
 
       - run: pnpm run build
-        env:
-          NEXT_PUBLIC_ENDPOINT_BASE_PATH: ${{ secrets.RECEPTION_API_URL }}
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
