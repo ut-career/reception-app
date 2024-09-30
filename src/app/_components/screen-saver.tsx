@@ -1,8 +1,8 @@
-"use client"
-import { Box, Button,Flex,Image } from "@kuma-ui/core";
+"use client";
+import { Box, Button, Flex, Image } from "@kuma-ui/core";
 import { useState, useEffect } from "react";
 
-const colors = ['#E4007F', '#00A0E9', '#22AB37', '#F2914A', '#E2E64C'];
+const colors = ["#E4007F", "#00A0E9", "#22AB37", "#F2914A", "#E2E64C"];
 
 const Animation: React.FC = () => {
   const [currentColorIndex, setCurrentColorIndex] = useState(0);
@@ -10,13 +10,13 @@ const Animation: React.FC = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentColorIndex((prevIndex) => (prevIndex + 1) % colors.length);
-    }, 3000); 
+    }, 3000);
 
-    return () => clearInterval(interval); 
+    return () => clearInterval(interval);
   }, []);
 
   return (
-   <Box
+    <Box
       position="fixed"
       top="0"
       left="0"
@@ -30,9 +30,9 @@ const Animation: React.FC = () => {
       transition="background-color 1s ease"
     >
       <Image
-        src='/rogo-hc-100-520.png'
-        alt='hitocolorロゴ'
-        width='400px'
+        src="/rogo-hc-100-520.png"
+        alt="hitocolorロゴ"
+        width="400px"
         position="absolute"
         animation="move 20s linear infinite"
       />
@@ -51,21 +51,31 @@ const Animation: React.FC = () => {
       </Button>
       <style jsx>{`
         @keyframes move {
-          0% { transform: translate(-75%, -500%); }
-          25% { transform: translate(75%, -500%); }
-          50% { transform: translate(75%, 500%); }
-          75% { transform: translate(-75%, 500%); }
-          100% { transform: translate(-75%, -500%); }
+          0% {
+            transform: translate(-75%, -500%);
+          }
+          25% {
+            transform: translate(75%, -500%);
+          }
+          50% {
+            transform: translate(75%, 500%);
+          }
+          75% {
+            transform: translate(-75%, 500%);
+          }
+          100% {
+            transform: translate(-75%, -500%);
+          }
         }
         @keyframes blink {
           0% {
-            opacity: 1;       
+            opacity: 1;
           }
           50% {
-            opacity: 0.2;       
+            opacity: 0.2;
           }
           100% {
-            opacity: 1;    
+            opacity: 1;
           }
         }
       `}</style>
@@ -73,37 +83,26 @@ const Animation: React.FC = () => {
   );
 };
 
-export const ScreenSaver = ({
-    children,
-  }: {
-    children: React.ReactNode
-  }) => {
-const [active, setActive] = useState<boolean>(false);
+export const ScreenSaver = ({ children }: { children: React.ReactNode }) => {
+  const [active, setActive] = useState<boolean>(false);
   useEffect(() => {
     let timer: NodeJS.Timeout;
 
     const resetTimer = () => {
       clearTimeout(timer);
       setActive(false);
-    // 確認しやすいように3秒でスクリーンセーバーに切り替わるように
-    // 足立さんに確認していただき次第30秒に戻します
-      timer = setTimeout(() => setActive(true), 3000);
+      timer = setTimeout(() => setActive(true), 30000);
     };
 
-    window.addEventListener('mousemove', resetTimer);
-    window.addEventListener('keydown', resetTimer);
-    // 上と同じく
-    timer = setTimeout(() => setActive(true), 3000);
+    window.addEventListener("mousemove", resetTimer);
+    window.addEventListener("keydown", resetTimer);
+    timer = setTimeout(() => setActive(true), 30000);
 
     return () => {
       clearTimeout(timer);
-      window.removeEventListener('mousemove', resetTimer);
-      window.removeEventListener('keydown', resetTimer);
+      window.removeEventListener("mousemove", resetTimer);
+      window.removeEventListener("keydown", resetTimer);
     };
   }, []);
-  return active ? (
-        <Animation/>
-      ): (
-       children
-      )
-}
+  return active ? <Animation /> : children;
+};
