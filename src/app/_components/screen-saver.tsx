@@ -22,8 +22,8 @@ const Animation: React.FC = () => {
       left="0"
       width="100%"
       height="100%"
-      backgroundColor={colors[currentColorIndex]}
       display="flex"
+      backgroundColor={colors[currentColorIndex] + "30"}
       justifyContent="center"
       alignItems="center"
       zIndex="9998"
@@ -39,13 +39,14 @@ const Animation: React.FC = () => {
       <Button
         as="div"
         fontSize="2rem"
-        color="white"
+        fontWeight="700"
+        color="#5D5959"
         backgroundColor="transparent"
-        border="2px solid white"
+        border="4px solid #5D5959"
         padding="1rem 2rem"
         borderRadius="5px"
         zIndex="9999"
-        animation="blink 1.5s infinite"
+        animation="blink 3s ease-in-out infinite"
       >
         画面をタップしてください
       </Button>
@@ -71,8 +72,14 @@ const Animation: React.FC = () => {
           0% {
             opacity: 1;
           }
+          25% {
+            opacity: 1;
+          }
           50% {
-            opacity: 0.2;
+            opacity: 0;
+          }
+          75% {
+            opacity: 1;
           }
           100% {
             opacity: 1;
